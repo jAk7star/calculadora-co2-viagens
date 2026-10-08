@@ -61,7 +61,7 @@ O projeto foi construído em etapas modulares, uma por vez:
 ## 🌐 Aplicação Publicada
 
 - **Link da Calculadora (GitHub Pages):** `https://<seu-usuario>.github.io/calculadora-co2-viagens/`
-- **Link do Repositório:** `https://github.com/<seu-usuario>/calculadora-co2-viagens`
+- **Link do Repositório:** `https://github.com/jAk7star/calculadora-co2-viagens.git`
 
 ---
 
