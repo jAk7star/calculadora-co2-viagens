@@ -67,7 +67,11 @@ O projeto foi construído em etapas modulares, uma por vez:
 
 ## 📸 Demonstração / Screenshots
 
-*(Adicione aqui um print da sua calculadora com uma viagem calculada!)*
+<img width="1507" height="832" alt="Captura de tela 2026-10-08 132704" src="https://github.com/user-attachments/assets/8503beea-5b64-4725-8711-a3d9d1c26c8e" />
+
+<img width="1361" height="836" alt="Captura de tela 2026-10-08 132719" src="https://github.com/user-attachments/assets/e3ed4782-4032-430e-8cf2-f7385cc0cb60" />
+
+
 
 ---
 *Projeto desenvolvido como parte do Desafio de Projeto da DIO com auxílio do GitHub Copilot.*
