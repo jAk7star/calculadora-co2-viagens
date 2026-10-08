@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Emissão de CO2 e Compensação de Viagens</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header__badge">🌿 EcoViagem</div>
+            <h1 class="header__title">Calculadora de Emissão de CO2</h1>
+            <p class="header__subtitle">Calcule o impacto ambiental das suas viagens e descubra como compensar a sua pegada de carbono.</p>
+        </header>
+
+        <!-- Main Form Section -->
+        <main class="main-content">
+            <section class="card form-section">
+                <h2 class="card__title"> Planejar Viagem</h2>
+                <form id="calculator-form" class="form">
+                    
+                    <!-- Search Route by Cities -->
+                    <div class="form__group">
+                        <label for="origin-input" class="form__label">Cidade de Origem</label>
+                        <div class="autocomplete-wrapper">
+                            <input 
+                                type="text" 
+                                id="origin-input" 
+                                class="form__input" 
+                                placeholder="Ex: São Paulo" 
+                                autocomplete="off"
+                            >
+                            <div id="origin-list" class="autocomplete-list hidden"></div>
+                        </div>
+                    </div>
+
+                    <div class="form__group">
+                        <label for="destination-input" class="form__label">Cidade de Destino</label>
+                        <div class="autocomplete-wrapper">
+                            <input 
+                                type="text" 
+                                id="destination-input" 
+                                class="form__input" 
+                                placeholder="Ex: Rio de Janeiro" 
+                                autocomplete="off"
+                            >
+                            <div id="destination-list" class="autocomplete-list hidden"></div>
+                        </div>
+                    </div>
+
+                    <div class="form__divider">
+                        <span>OU DIGITE A DISTÂNCIA MANUALMENTE</span>
+                    </div>
+
+                    <!-- Manual Distance -->
+                    <div class="form__group">
+                        <label for="distance-input" class="form__label">Distância da Viagem (em km)</label>
+                        <input 
+                            type="number" 
+                            id="distance-input" 
+                            class="form__input" 
+                            placeholder="Ex: 435" 
+                            min="1" 
+                            step="0.1"
+                        >
+                    </div>
+
+                    <!-- Primary Transport Choice -->
+                    <div class="form__group">
+                        <label for="transport-select" class="form__label">Meio de Transporte Principal</label>
+                        <select id="transport-select" class="form__select" required>
+                            <option value="carro">Carro (120 g CO2/km)</option>
+                            <option value="onibus">Ônibus (30 g CO2/km por passageiro)</option>
+                            <option value="caminhao">Caminhão (900 g CO2/km)</option>
+                            <option value="bicicleta">Bicicleta (0 g CO2/km)</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="button button--primary" id="btn-calculate">
+                        <span>Calcular Emissões</span>
+                    </button>
+                </form>
+            </section>
+
+            <!-- Results Section (Initially Hidden) -->
+            <section id="results-section" class="card results-section hidden">
+                <div class="results-header">
+                    <h2 class="card__title"> Resumo da Viagem</h2>
+                    <span class="badge" id="route-badge">Rota Calculada</span>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <span class="metric-card__label">Distância Total</span>
+                        <div class="metric-card__value"><span id="res-distance">0</span> <small>km</small></div>
+                    </div>
+                    <div class="metric-card metric-card--highlight">
+                        <span class="metric-card__label">Emissão Estimada</span>
+                        <div class="metric-card__value"><span id="res-emission">0</span> <small>kg CO₂</small></div>
+                    </div>
+                </div>
+
+                <!-- Comparison Section -->
+                <div class="comparison-container">
+                    <h3 class="subsection-title">Comparação entre Meios de Transporte</h3>
+                    <div class="comparison-grid" id="comparison-grid">
+                        <!-- Transport cards will be rendered dynamically by UI.js -->
+                    </div>
+                </div>
+
+                <!-- Carbon Offsetting Section -->
+                <div class="offset-container">
+                    <h3 class="subsection-title">🌳 Compensação de Créditos de Carbono</h3>
+                    <div class="offset-card">
+                        <div class="offset-card__info">
+                            <p class="offset-card__text">
+                                Para neutralizar o impacto de <strong id="res-emission-text">0 kg</strong> de CO₂, você pode adquirir créditos de carbono que financiam projetos de reflorestamento e energia limpa.
+                            </p>
+                        </div>
+                        <div class="offset-card__summary">
+                            <div class="offset-item">
+                                <span class="offset-item__label">Créditos de Carbono:</span>
+                                <span class="offset-item__value" id="res-credits">0.00</span>
+                                <small>(1 crédito = 1 tonelada de CO₂)</small>
+                            </div>
+                            <div class="offset-item">
+                                <span class="offset-item__label">Custo Estimado de Compensação:</span>
+                                <span class="offset-item__value offset-item__value--cost" id="res-cost">R$ 0,00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>Desenvolvido com o auxílio do <strong>GitHub Copilot</strong> • Desafio de Projeto DIO</p>
+        </footer>
+    </div>
+
+    <!-- Scripts em Ordem de Dependência -->
+    <script src="js/config.js"></script>
+    <script src="js/routes.js"></script>
+    <script src="js/calculator.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
